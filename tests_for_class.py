@@ -57,6 +57,7 @@ class BooksCollector:
         return self.favorites 
 
 
+
 import pytest
 from main import BooksCollector
 
@@ -129,13 +130,20 @@ class TestBooksCollector:
         collector.add_new_book('Они скоро умрут')
         collector.set_book_genre('Они скоро умрут', 'Фантастика')
 
-        assert collection.get_book_genre('Они скоро умрут') == 'Фантастика'    
+        assert collector.get_book_genre('Они скоро умрут') == 'Фантастика'    
 
     def test_set_book_genre_not_sets_if_book_not_in_books_genre(self):
         collector = BooksCollection()
         collector.set_book_genre('Шерлок Хоумс', 'Детектив')
 
-        assert 'Шерлок Хоумс', not in books_genre
+        assert 'Шерлок Хоумс', not in collector.get_books_genre()
+
+    def test_set_book_genre_with_unexistent_genre_not_added(self):
+        collector = BooksCollection()
+        collector.add_new_book('Дятел')
+        collection.set_book_genre('Дятел', 'Триллеры')
+
+        assert 'Дятел' not in collector.get_book_genre()  
 
     def get_books_with_specific_genre_fantastic(self):
         collector = BooksCollection()
@@ -197,7 +205,7 @@ class TestBooksCollector:
         collector.add_new_book('Мир')
         collector.set_book_genre('Мир', 'Комедия')
 
-        assert 'Мир' in books_genre
+        assert 'Мир' in collector.get_books_genre
 
     def test_add_books_in_favorites(self):
         collector = BooksCollection()
@@ -258,4 +266,17 @@ class TestBooksCollector:
         collector = BooksCollection()
         favorites = collector.get_list_of_favorites_books()
 
-        assert favorites = [] 
+        assert favorites = []    
+
+    @pytest.mark.parametrize('name, genre',
+        [
+            ('Если все коты в мире исчезнут', 'Ужасы'),
+            ('Она и её кот', 'Детективы')
+        ]
+        )
+
+def test_add_name_and_check_genre(name, genre):
+    collector = BooksCollector()
+    collector.add_new_book(name)
+    collector.set_book_genre(name, genre)
+    assert collector.get_book_genre(name) == genre
