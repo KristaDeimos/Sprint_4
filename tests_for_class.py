@@ -49,12 +49,12 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.set_book_genre('Шерлок Хоумс', 'Детектив')
 
-        assert 'Шерлок Хоумс', not in collector.get_books_genre()
+        assert 'Шерлок Хоумс' not in collector.get_book_genre()
 
     def test_set_book_genre_with_unexistent_genre_not_added(self):
         collector = BooksCollector()
         collector.add_new_book('Дятел')
-        collection.set_book_genre('Дятел', 'Триллеры')
+        collector.set_book_genre('Дятел', 'Триллеры')
 
         assert 'Дятел' not in collector.get_book_genre()  
 
@@ -62,7 +62,7 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.add_new_book('Книга')
         collector.set_book_genre('Книга', 'Детективы')
-        collector.add_new1-book('Под лестницей')
+        collector.add_new_book('Под лестницей')
         collector.set_book_genre('Под лестницей', 'Детективы')
 
         specific_genre_books = collector.get_books_with_specific_genre('Детективы')
@@ -80,7 +80,7 @@ class TestBooksCollector:
         specific_genre_book_horrors = collector.get_books_with_specific_genre('Ужасы')
 
         assert specific_genre_book_fantastic == ['Море цветов']
-        assert specific_genre_books_horrors == ['Ужасы']
+        assert specific_genre_book_horrors == ['Ужасы']
 
     def test_get_books_genre(self):
         collector = BooksCollector()
@@ -159,8 +159,8 @@ class TestBooksCollector:
         ]
         )
 
-def test_get_book_genre(name, genre):
-    collector = BooksCollector()
-    collector.add_new_book(name)
-    collector.set_book_genre(name, genre)
-    assert collector.get_book_genre(name) == genre
+    def test_get_book_genre(name, genre):
+        collector = BooksCollector()
+        collector.add_new_book(name)
+        collector.set_book_genre(name, genre)
+        assert collector.get_book_genre(name) == genre
