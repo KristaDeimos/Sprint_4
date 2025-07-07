@@ -3,19 +3,12 @@ from main import BooksCollector
 
 class TestBooksCollector:
 
-    def test_add_new_book_book_is_added(self):
+    def test_add_new_book_book_was_added(self):
         collector = BooksCollector()
         collector.add_new_book('Дом в котором')
         books = collector.get_book_genre()
 
         assert 'Дом в котором' in books
-
-    def test_add_new_book_with_twenty_symbols_added(self):
-        collector = BooksCollector()
-        collector.add_new_book('Цветы для Элджернона')
-        books = collector.get_book_genre()
-
-        assert 'Цветы для Элджернона' in books
 
     def test_add_new_book_with_forty_symbols_added(self):
         collector = BooksCollector()
@@ -65,7 +58,7 @@ class TestBooksCollector:
 
         assert 'Дятел' not in collector.get_book_genre()  
 
-    def get_books_with_specific_genre_detective(self):
+    def test_get_specific_genre_book_detective(self):
         collector = BooksCollector()
         collector.add_new_book('Книга')
         collector.set_book_genre('Книга', 'Детективы')
@@ -126,7 +119,7 @@ class TestBooksCollector:
 
         children_books = collector.get_books_for_children()
 
-        assert 'Колобок' in choldren_books
+        assert 'Колобок' in children_books
 
     def test_get_books_for_children_age_rating(self):
         collector = BooksCollector()
@@ -157,7 +150,7 @@ class TestBooksCollector:
         collector = BooksCollector()
         favorites = collector.get_list_of_favorites_books()
 
-        assert favorites = []    
+        assert favorites == []    
 
     @pytest.mark.parametrize('name, genre',
         [
